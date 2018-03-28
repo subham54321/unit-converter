@@ -1,6 +1,6 @@
 .data
 msg:.asciiz "\t \t \t \t \t COA PROJECT \n"
-msg2:.asciiz "\nDedicated to APALA GHOSH\n"
+msg2:.asciiz "Project Member: \n*Dedicated to APALA GHOSH\n"
 msg3:.asciiz"\n \n \nPlease select the desired converter:\n1-Length Converter \n2-Temperature Converter\n"
 msg4:.asciiz"Enter the Length in(cm)\n"
 msg5:.asciiz"Select the desired unit you want to convert to:\n1-Meter 2-Foot 3-Kilometer(Km) 4-Inch\n"
@@ -148,10 +148,10 @@ beq $v0,$t2,fah
 
 cel:
 lw $s0,itemp
-li.s $f1,-273.15
+li.s $f1,273.15
 mtc1 $s0,$f12		#for moving the int value from int register to float register
 cvt.s.w $f12,$f12
-mul.s $f12,$f12,$f1
+sub.s $f12,$f12,$f1
 
 la $a0,ansmsg
 li $v0,4
@@ -164,10 +164,12 @@ j prompt
 
 fah:
 lw $s0,itemp
-li.s $f1,-459.67
+li.s $f1,1.8
+li.s $f2,459.67
 mtc1 $s0,$f12		#for moving the int value from int register to float register
 cvt.s.w $f12,$f12
 mul.s $f12,$f12,$f1
+sub.s $f12,$f12,$f2
 
 la $a0,ansmsg
 li $v0,4
